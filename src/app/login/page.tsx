@@ -1,0 +1,13 @@
+import { Suspense } from "react";
+
+import { LoginForm } from "@/components/login-form";
+
+export default function LoginPage() {
+  return (
+    <main className="flex min-h-full flex-1 items-center justify-center bg-zinc-50 px-4 py-12 dark:bg-zinc-950">
+      <Suspense fallback={<div className="text-sm text-zinc-500">Loading...</div>}>
+        <LoginForm />
+      </Suspense>
+    </main>
+  );
+}

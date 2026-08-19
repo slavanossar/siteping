@@ -1,0 +1,67 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model SitepingFeedback {
+  id               String               @id @default(cuid())
+  projectName      String
+  type             String
+  message          String               @db.Text
+  status           String               @default("open")
+  url              String
+  urlPattern       String?
+  screenshotUrl    String?              @db.Text
+  screenshotRegion Json?
+  diagnostics      Json?
+  viewport         String
+  userAgent        String
+  authorName       String
+  authorEmail      String
+  clientId         String               @unique
+  resolvedAt       DateTime?
+  createdAt        DateTime             @default(now())
+  updatedAt        DateTime             @updatedAt
+  annotations      SitepingAnnotation[]
+
+  @@index([projectName])
+  @@index([projectName, status, createdAt])
+  @@index([projectName, url])
+}
+
+model SitepingAnnotation {
+  id               String           @id @default(cuid())
+  feedbackId       String
+  feedback         SitepingFeedback @relation(fields: [feedbackId], references: [id], onDelete: Cascade)
+  cssSelector      String           @db.Text
+  xpath            String           @db.Text
+  textSnippet      String           @db.Text
+  elementTag       String
+  elementId        String?
+  textPrefix       String           @db.Text
+  textSuffix       String           @db.Text
+  fingerprint      String
+  neighborText     String           @db.Text
+  anchorKey        String?
+  xPct             Float
+  yPct             Float
+  wPct             Float
+  hPct             Float
+  scrollX          Float
+  scrollY          Float
+  viewportW        Int
+  viewportH        Int
+  devicePixelRatio Float            @default(1)
+  createdAt        DateTime         @default(now())
+
+  @@index([feedbackId])
+}
