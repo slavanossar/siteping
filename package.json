@@ -18,6 +18,7 @@
     "@siteping/dashboard": "^0.2.5",
     "dotenv": "^17.4.2",
     "next": "16.3.1",
+    "prisma": "^7.9.1",
     "pg": "^8.23.0",
     "react": "19.2.8",
     "react-dom": "19.2.8"
@@ -30,7 +31,6 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.3.1",
-    "prisma": "^7.9.1",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
