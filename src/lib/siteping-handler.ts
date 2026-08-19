@@ -18,7 +18,7 @@ export function getSitepingHandlers(): SitepingHandler {
   cachedHandlers = createSitepingHandler({
     prisma,
     apiKey: getSitepingApiKey(),
-    publicEndpoints: ["POST", "OPTIONS"],
+    publicEndpoints: ["GET", "POST", "OPTIONS"],
     allowedOrigins: allowedOrigins.length > 0 ? allowedOrigins : undefined,
     // screenshotStorage can be wired here later (e.g. Cloudflare R2).
     // webhooks can be wired here later (e.g. GitHub issue creation).
